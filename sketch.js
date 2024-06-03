@@ -334,7 +334,24 @@ function draw()
 
 	///////////INTERACTION CODE//////////
 	//Put conditional statements to move the game character below here
-
+    
+    if (isLeft)
+        {
+            gameChar_x -= 5;
+        }
+    if (isRight)
+        {
+            gameChar_x += 5;
+        }
+    if (gameChar_y < floorPos_y)
+        {
+            gameChar_y += 2;
+            isFalling = true;
+        }
+    else 
+        {
+            isFalling = false;
+        }
 }
 
 
@@ -349,6 +366,10 @@ function keyPressed()
     else if (keyCode == 83)
     {
         isRight = true;
+    }
+    else if (keyCode == 87 && !isFalling)
+    {
+        gameChar_y -= 100; 
     }
 	//open up the console to see how these work
 	console.log("keyPressed: " + key);
