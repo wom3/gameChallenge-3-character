@@ -337,11 +337,11 @@ function draw()
     
     if (isLeft)
         {
-            gameChar_x -= 5;
+            gameChar_x = max(gameChar_x - 5, 0);
         }
     if (isRight)
         {
-            gameChar_x += 5;
+            gameChar_x = min(gameChar_x + 5, width);
         }
     if (gameChar_y < floorPos_y)
         {
