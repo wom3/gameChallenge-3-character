@@ -394,15 +394,15 @@ function keyPressed()
 {
 	// if statements to control the animation of the character when
 	// keys are pressed.
-    if (keyCode == 65 && !isPlummeting)
+    if ((keyCode == 37 || keyCode ==65) && !isPlummeting)
     {
         isLeft = true;        
     }
-    else if (keyCode == 83 && !isPlummeting)
+    else if ((keyCode == 39 || keyCode == 83) && !isPlummeting)
     {
         isRight = true;
     }
-    else if (keyCode == 87 && !isFalling && !isPlummeting)
+    else if ((keyCode == 32 || keyCode == 87) && !isFalling && !isPlummeting)
     {
         gameChar_y -= 100; 
     }
@@ -416,11 +416,11 @@ function keyReleased()
 	// if statements to control the animation of the character when
 	// keys are released.
     
-    if (keyCode == 65)
+    if (keyCode == 37 || keyCode == 65)
     {
         isLeft = false;        
     }
-    else if (keyCode == 83)
+    else if (keyCode == 39 || keyCode == 83)
     {
         isRight = false;
     }
