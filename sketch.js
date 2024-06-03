@@ -13,6 +13,9 @@ var gameChar_x;
 var gameChar_y;
 var floorPos_y;
 
+var collectable;
+var canyon;
+
 var isLeft;
 var isRight;
 var isFalling;
@@ -30,6 +33,18 @@ function setup()
     isRight = false;
     isFalling = false;
     isPlummeting = false;
+    
+     collectable = {
+        x_pos: 100,
+        y_pos: floorPos_y-25,
+        size: 50,
+        isFound: false
+    }
+    
+    canyon = {
+        x_pos: 200,
+        width: 100 
+    }
 }
 
 function draw()
@@ -43,11 +58,23 @@ function draw()
 	noStroke();
 	fill(0,155,0);
 	rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
-
+    
+    
+    // draw collectable
+    if (dist(gameChar_x,gameChar_y,collectable.x_pos,collectable.y_pos) < 50){
+        collectable.isFound = true
+    }
+    if (collectable.isFound == false){
+        fill(255, 215, 0);
+	    ellipse(collectable.x_pos+20, collectable.y_pos, collectable.size, collectable.size)    
+    }
+    
+    
 	//draw the canyon
-
-
+    fill(139, 69, 19);
+	rect(canyon.x_pos, floorPos_y, canyon.width, height - floorPos_y);
 	//the game character
+    stroke(0)
 	if(isLeft && isFalling)
 	{
 		// add your jumping-left code
@@ -334,24 +361,32 @@ function draw()
 
 	///////////INTERACTION CODE//////////
 	//Put conditional statements to move the game character below here
-    
-    if (isLeft)
-        {
+       if (!isPlummeting) {
+        if (isLeft) {
             gameChar_x = max(gameChar_x - 5, 0);
         }
-    if (isRight)
-        {
+        if (isRight) {
             gameChar_x = min(gameChar_x + 5, width);
         }
-    if (gameChar_y < floorPos_y)
-        {
-            gameChar_y += 2;
-            isFalling = true;
-        }
-    else 
-        {
-            isFalling = false;
-        }
+    }
+
+    if (gameChar_y < floorPos_y) {
+        gameChar_y += 2;
+        isFalling = true;
+    }
+    else {
+        isFalling = false;
+    }
+    
+     // Falling down the canyon
+    if (gameChar_x > canyon.x_pos && gameChar_x < canyon.x_pos + canyon.width && gameChar_y >= floorPos_y) {
+        isPlummeting = true;
+    }
+
+    // Make character fall when plummeting
+    if (isPlummeting) {
+        gameChar_y += 5;
+    }
 }
 
 
@@ -359,15 +394,15 @@ function keyPressed()
 {
 	// if statements to control the animation of the character when
 	// keys are pressed.
-    if (keyCode == 65)
+    if (keyCode == 65 && !isPlummeting)
     {
         isLeft = true;        
     }
-    else if (keyCode == 83)
+    else if (keyCode == 83 && !isPlummeting)
     {
         isRight = true;
     }
-    else if (keyCode == 87 && !isFalling)
+    else if (keyCode == 87 && !isFalling && !isPlummeting)
     {
         gameChar_y -= 100; 
     }
