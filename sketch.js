@@ -1,10 +1,6 @@
 /*
 
-The Game Project
-
-Week 3
-
-Game interaction
+The Game Project Part 4 - Side Scrolling
 
 */
 
@@ -20,6 +16,9 @@ var isLeft;
 var isRight;
 var isFalling;
 var isPlummeting;
+
+var trees_x;
+var treePos_y;
 
 
 function setup()
@@ -45,6 +44,10 @@ function setup()
         x_pos: 200,
         width: 100 
     }
+    
+    trees_x = [300, 500, 900, 1150];
+    treePos_y = height/2;
+    
 }
 
 function draw()
@@ -59,6 +62,14 @@ function draw()
 	fill(0,155,0);
 	rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
     
+    for(var i = 0; i < trees_x.length; i++) {
+        fill(165,42,42)
+        rect(trees_x[i],treePos_y,20,145);
+        fill(0,155,0)
+        triangle(trees_x[i]-40,treePos_y+20,trees_x[i]+10,treePos_y-30,trees_x[i]+60,treePos_y+20)
+        triangle(trees_x[i]-37,treePos_y,trees_x[i]+10,treePos_y-60,trees_x[i]+57,treePos_y)
+        triangle(trees_x[i]-32,treePos_y-22,trees_x[i]+10,treePos_y-60,trees_x[i]+52,treePos_y-22)
+    }
     
     // draw collectable
     if (dist(gameChar_x,gameChar_y,collectable.x_pos,collectable.y_pos) < 50){
@@ -363,10 +374,10 @@ function draw()
 	//Put conditional statements to move the game character below here
        if (!isPlummeting) {
         if (isLeft) {
-            gameChar_x = max(gameChar_x - 5, 0);
+            gameChar_x -= 5;
         }
         if (isRight) {
-            gameChar_x = min(gameChar_x + 5, width);
+            gameChar_x += 5;
         }
     }
 
