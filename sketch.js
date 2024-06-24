@@ -21,6 +21,7 @@ var trees_x;
 var treePos_y;
 
 var mountain;
+var cloud;
 
 
 function setup()
@@ -55,6 +56,12 @@ function setup()
         y_pos: 100
     }
     
+    cloud = {
+        x_pos: [0, 400, 600],
+        y_pos: 100,
+        size: 20
+    }
+    
 }
 
 function draw()
@@ -81,6 +88,15 @@ function draw()
         
     }
     
+    // Draw cloud
+    
+    for (var i = 0; i < cloud.x_pos.length; i ++){
+        fill(255)
+	   ellipse(cloud.x_pos[i]+200, cloud.y_pos, 5*cloud.size)
+	ellipse(cloud.x_pos[i]+250,cloud.y_pos,5*cloud.size)
+	ellipse(cloud.x_pos[i]+300,cloud.y_pos, 4*cloud.size)
+        
+    }
     
     
     // draw trees
