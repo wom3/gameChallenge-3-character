@@ -61,13 +61,13 @@ function setup()
         {
             x_pos: 100,
             y_pos: floorPos_y-25,
-            size: 50,
+            size: 40,
             isFound: false
         },
         {
             x_pos: 200,
             y_pos: floorPos_y-25,
-            size: 50,
+            size: 20,
             isFound: false
         },
         {
@@ -79,13 +79,13 @@ function setup()
         {
             x_pos: 400,
             y_pos: floorPos_y-25,
-            size: 50,
+            size: 30,
             isFound: false
         },
         {
             x_pos: 600,
             y_pos: floorPos_y-25,
-            size: 50,
+            size: 60,
             isFound: false
         }
     ]
@@ -93,15 +93,15 @@ function setup()
     canyons = [
         {
             x_pos: 200,
-            width: 100 
+            width: 130 
         },
         {
             x_pos: 400,
-            width: 100 
+            width: 70 
         },
         {
             x_pos: 600,
-            width: 100 
+            width: 150 
         }
     ]
     
