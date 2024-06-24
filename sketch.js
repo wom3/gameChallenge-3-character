@@ -20,6 +20,8 @@ var isPlummeting;
 var trees_x;
 var treePos_y;
 
+var mountain;
+
 
 function setup()
 {
@@ -48,6 +50,11 @@ function setup()
     trees_x = [300, 500, 900, 1150];
     treePos_y = height/2;
     
+    mountain = {
+        x_pos: [-400, -280, 100, 400],
+        y_pos: 100
+    }
+    
 }
 
 function draw()
@@ -62,6 +69,21 @@ function draw()
 	fill(0,155,0);
 	rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
     
+    // draw mountaints
+    for (var i = 0; i < mountain.x_pos.length; i++){
+        fill(105, 105, 105)
+	quad(mountain.x_pos[i]+380, mountain.y_pos+332, mountain.x_pos[i]+480, mountain.y_pos+132, mountain.x_pos[i]+580, mountain.y_pos+132, mountain.x_pos[i]+680, mountain.y_pos+332)
+	fill(255)
+	triangle(mountain.x_pos[i]+480, mountain.y_pos+132, mountain.x_pos[i]+500, mountain.y_pos+102, mountain.x_pos[i]+520, mountain.y_pos+132)
+	triangle(mountain.x_pos[i]+500, mountain.y_pos+132, mountain.x_pos[i]+530, mountain.y_pos+82, mountain.x_pos[i]+560, mountain.y_pos+132)
+	triangle(mountain.x_pos[i]+540, mountain.y_pos
+             +132, mountain.x_pos[i]+560, mountain.y_pos+102, mountain.x_pos[i]+580, mountain.y_pos+132)
+        
+    }
+    
+    
+    
+    // draw trees
     for(var i = 0; i < trees_x.length; i++) {
         fill(165,42,42)
         rect(trees_x[i],treePos_y,20,145);
