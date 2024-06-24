@@ -24,7 +24,7 @@ var mountain;
 var cloud;
 
 var collectables;
-
+var canyons;
 
 function setup()
 {
@@ -59,36 +59,53 @@ function setup()
     
     collectables = [
         {
-        x_pos: 100,
-        y_pos: floorPos_y-25,
-        size: 50,
-        isFound: false
-    },
+            x_pos: 100,
+            y_pos: floorPos_y-25,
+            size: 50,
+            isFound: false
+        },
         {
-        x_pos: 200,
-        y_pos: floorPos_y-25,
-        size: 50,
-        isFound: false
-    },
+            x_pos: 200,
+            y_pos: floorPos_y-25,
+            size: 50,
+            isFound: false
+        },
         {
-        x_pos: 300,
-        y_pos: floorPos_y-25,
-        size: 50,
-        isFound: false
-    },
+            x_pos: 300,
+            y_pos: floorPos_y-25,
+            size: 50,
+            isFound: false
+        },
         {
-        x_pos: 400,
-        y_pos: floorPos_y-25,
-        size: 50,
-        isFound: false
-    },
+            x_pos: 400,
+            y_pos: floorPos_y-25,
+            size: 50,
+            isFound: false
+        },
         {
-        x_pos: 600,
-        y_pos: floorPos_y-25,
-        size: 50,
-        isFound: false
-    }
+            x_pos: 600,
+            y_pos: floorPos_y-25,
+            size: 50,
+            isFound: false
+        }
     ]
+    
+    canyons = [
+        {
+            x_pos: 200,
+            width: 100 
+        },
+        {
+            x_pos: 400,
+            width: 100 
+        },
+        {
+            x_pos: 600,
+            width: 100 
+        }
+    ]
+    
+    
     
 }
 
@@ -126,8 +143,10 @@ function draw()
 
     
 	//draw the canyon
+    for (var i = 0; i < canyons.length; i++){
+        drawCanyon(canyons[i])    
+    }
     
-    drawCanyon(canyon)
     
 	//the game character
     stroke(0)
@@ -435,7 +454,9 @@ function draw()
     }
     
      // Falling down the canyon
-    checkCanyon(canyon)    
+    for (var i =0; i < canyons.length; i++){
+        checkCanyon(canyons[i])       
+    }
     
     // Make character fall when plummeting
     if (isPlummeting) {
