@@ -77,47 +77,20 @@ function draw()
 	rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
     
     // draw mountaints
-    for (var i = 0; i < mountain.x_pos.length; i++){
-        fill(105, 105, 105)
-	quad(mountain.x_pos[i]+380, mountain.y_pos+332, mountain.x_pos[i]+480, mountain.y_pos+132, mountain.x_pos[i]+580, mountain.y_pos+132, mountain.x_pos[i]+680, mountain.y_pos+332)
-	fill(255)
-	triangle(mountain.x_pos[i]+480, mountain.y_pos+132, mountain.x_pos[i]+500, mountain.y_pos+102, mountain.x_pos[i]+520, mountain.y_pos+132)
-	triangle(mountain.x_pos[i]+500, mountain.y_pos+132, mountain.x_pos[i]+530, mountain.y_pos+82, mountain.x_pos[i]+560, mountain.y_pos+132)
-	triangle(mountain.x_pos[i]+540, mountain.y_pos
-             +132, mountain.x_pos[i]+560, mountain.y_pos+102, mountain.x_pos[i]+580, mountain.y_pos+132)
-        
-    }
+    
+    drawMountains()
     
     // Draw cloud
     
-    for (var i = 0; i < cloud.x_pos.length; i ++){
-        fill(255)
-	   ellipse(cloud.x_pos[i]+200, cloud.y_pos, 5*cloud.size)
-	ellipse(cloud.x_pos[i]+250,cloud.y_pos,5*cloud.size)
-	ellipse(cloud.x_pos[i]+300,cloud.y_pos, 4*cloud.size)
-        
-    }
-    
+    drawClouds()
     
     // draw trees
-    for(var i = 0; i < trees_x.length; i++) {
-        fill(165,42,42)
-        rect(trees_x[i],treePos_y,20,145);
-        fill(0,155,0)
-        triangle(trees_x[i]-40,treePos_y+20,trees_x[i]+10,treePos_y-30,trees_x[i]+60,treePos_y+20)
-        triangle(trees_x[i]-37,treePos_y,trees_x[i]+10,treePos_y-60,trees_x[i]+57,treePos_y)
-        triangle(trees_x[i]-32,treePos_y-22,trees_x[i]+10,treePos_y-60,trees_x[i]+52,treePos_y-22)
-    }
+    
+    drawTrees()
     
     // draw collectable
-    if (dist(gameChar_x,gameChar_y,collectable.x_pos,collectable.y_pos) < 50){
-        collectable.isFound = true
-    }
-    if (collectable.isFound == false){
-        fill(255, 215, 0);
-	    ellipse(collectable.x_pos+20, collectable.y_pos, collectable.size, collectable.size)    
-    }
     
+    drawCollectable(collectable)
     
 	//draw the canyon
     fill(139, 69, 19);
@@ -476,4 +449,51 @@ function keyReleased()
     
 	console.log("keyReleased: " + key);
 	console.log("keyReleased: " + keyCode);
+}
+
+function drawClouds() {
+    for (var i = 0; i < cloud.x_pos.length; i ++){
+        fill(255)
+	   ellipse(cloud.x_pos[i]+200, cloud.y_pos, 5*cloud.size)
+	ellipse(cloud.x_pos[i]+250,cloud.y_pos,5*cloud.size)
+	ellipse(cloud.x_pos[i]+300,cloud.y_pos, 4*cloud.size)
+        
+    }
+    
+}
+
+function drawMountains() {
+    for (var i = 0; i < mountain.x_pos.length; i++){
+        fill(105, 105, 105)
+	quad(mountain.x_pos[i]+380, mountain.y_pos+332, mountain.x_pos[i]+480, mountain.y_pos+132, mountain.x_pos[i]+580, mountain.y_pos+132, mountain.x_pos[i]+680, mountain.y_pos+332)
+	fill(255)
+	triangle(mountain.x_pos[i]+480, mountain.y_pos+132, mountain.x_pos[i]+500, mountain.y_pos+102, mountain.x_pos[i]+520, mountain.y_pos+132)
+	triangle(mountain.x_pos[i]+500, mountain.y_pos+132, mountain.x_pos[i]+530, mountain.y_pos+82, mountain.x_pos[i]+560, mountain.y_pos+132)
+	triangle(mountain.x_pos[i]+540, mountain.y_pos
+             +132, mountain.x_pos[i]+560, mountain.y_pos+102, mountain.x_pos[i]+580, mountain.y_pos+132)
+        
+    }
+    
+}
+
+function drawTrees() {
+    for(var i = 0; i < trees_x.length; i++) {
+        fill(165,42,42)
+        rect(trees_x[i],treePos_y,20,145);
+        fill(0,155,0)
+        triangle(trees_x[i]-40,treePos_y+20,trees_x[i]+10,treePos_y-30,trees_x[i]+60,treePos_y+20)
+        triangle(trees_x[i]-37,treePos_y,trees_x[i]+10,treePos_y-60,trees_x[i]+57,treePos_y)
+        triangle(trees_x[i]-32,treePos_y-22,trees_x[i]+10,treePos_y-60,trees_x[i]+52,treePos_y-22)
+    }
+    
+}
+
+function drawCollectable(t_collectable) {
+    if (dist(gameChar_x,gameChar_y,t_collectable.x_pos,t_collectable.y_pos) < 50){
+        t_collectable.isFound = true
+    }
+    if (t_collectable.isFound == false){
+        fill(255, 215, 0);
+	    ellipse(collectable.x_pos+20, t_collectable.y_pos, t_collectable.size, t_collectable.size)    
+    }
 }
