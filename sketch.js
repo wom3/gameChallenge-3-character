@@ -23,6 +23,8 @@ var treePos_y;
 var mountain;
 var cloud;
 
+var collectables;
+
 
 function setup()
 {
@@ -35,13 +37,6 @@ function setup()
     isRight = false;
     isFalling = false;
     isPlummeting = false;
-    
-     collectable = {
-        x_pos: 100,
-        y_pos: floorPos_y-25,
-        size: 50,
-        isFound: false
-    }
     
     canyon = {
         x_pos: 200,
@@ -61,6 +56,39 @@ function setup()
         y_pos: 100,
         size: 20
     }
+    
+    collectables = [
+        {
+        x_pos: 100,
+        y_pos: floorPos_y-25,
+        size: 50,
+        isFound: false
+    },
+        {
+        x_pos: 200,
+        y_pos: floorPos_y-25,
+        size: 50,
+        isFound: false
+    },
+        {
+        x_pos: 300,
+        y_pos: floorPos_y-25,
+        size: 50,
+        isFound: false
+    },
+        {
+        x_pos: 400,
+        y_pos: floorPos_y-25,
+        size: 50,
+        isFound: false
+    },
+        {
+        x_pos: 600,
+        y_pos: floorPos_y-25,
+        size: 50,
+        isFound: false
+    }
+    ]
     
 }
 
@@ -91,7 +119,11 @@ function draw()
     // draw collectable
 //    drawCollectable(collectable)
     
-    checkCollectable(collectable)
+    for(var i=0; i<collectables.length; i++){
+        checkCollectable(collectables[i])
+    }
+    
+
     
 	//draw the canyon
     
@@ -490,7 +522,7 @@ function drawTrees() {
 
 function drawCollectable(t_collectable) {
         fill(255, 215, 0);
-	    ellipse(collectable.x_pos+20, t_collectable.y_pos, t_collectable.size, t_collectable.size)    
+	    ellipse(t_collectable.x_pos+20, t_collectable.y_pos, t_collectable.size, t_collectable.size)    
 }
 
 function checkCollectable(t_collectable) {
