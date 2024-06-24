@@ -89,6 +89,7 @@ function draw()
     drawTrees()
     
     // draw collectable
+//    drawCollectable(collectable)
     
     checkCollectable(collectable)
     
@@ -402,10 +403,8 @@ function draw()
     }
     
      // Falling down the canyon
-    if (gameChar_x > canyon.x_pos && gameChar_x < canyon.x_pos + canyon.width && gameChar_y >= floorPos_y) {
-        isPlummeting = true;
-    }
-
+    checkCanyon(canyon)    
+    
     // Make character fall when plummeting
     if (isPlummeting) {
         gameChar_y += 5;
@@ -506,4 +505,10 @@ function checkCollectable(t_collectable) {
 function drawCanyon(t_canyon) {
     fill(139, 69, 19);
 	rect(t_canyon.x_pos, floorPos_y, t_canyon.width, height - floorPos_y);
+}
+
+function checkCanyon(t_canyon) {
+    if (gameChar_x > t_canyon.x_pos && gameChar_x < t_canyon.x_pos + t_canyon.width && gameChar_y >= floorPos_y) {
+        isPlummeting = true;
+    }
 }
