@@ -90,11 +90,12 @@ function draw()
     
     // draw collectable
     
-    drawCollectable(collectable)
+    checkCollectable(collectable)
     
 	//draw the canyon
-    fill(139, 69, 19);
-	rect(canyon.x_pos, floorPos_y, canyon.width, height - floorPos_y);
+    
+    drawCanyon(canyon)
+    
 	//the game character
     stroke(0)
 	if(isLeft && isFalling)
@@ -489,11 +490,20 @@ function drawTrees() {
 }
 
 function drawCollectable(t_collectable) {
+        fill(255, 215, 0);
+	    ellipse(collectable.x_pos+20, t_collectable.y_pos, t_collectable.size, t_collectable.size)    
+}
+
+function checkCollectable(t_collectable) {
     if (dist(gameChar_x,gameChar_y,t_collectable.x_pos,t_collectable.y_pos) < 50){
         t_collectable.isFound = true
     }
     if (t_collectable.isFound == false){
-        fill(255, 215, 0);
-	    ellipse(collectable.x_pos+20, t_collectable.y_pos, t_collectable.size, t_collectable.size)    
+        drawCollectable(t_collectable)
     }
+}
+
+function drawCanyon(t_canyon) {
+    fill(139, 69, 19);
+	rect(t_canyon.x_pos, floorPos_y, t_canyon.width, height - floorPos_y);
 }
