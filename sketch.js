@@ -25,6 +25,9 @@ var cloud;
 var collectables;
 var canyons;
 
+var scrollPos;
+var gameChar_world_x;
+
 function setup() {
   createCanvas(1024, 576);
   floorPos_y = (height * 3) / 4;
@@ -35,6 +38,8 @@ function setup() {
   isRight = false;
   isFalling = false;
   isPlummeting = false;
+
+  scrollPos = 0;
 
   canyon = {
     x_pos: 200,
@@ -114,7 +119,6 @@ function draw() {
   rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
 
   // draw mountaints
-
   drawMountains();
 
   // Draw cloud
@@ -138,6 +142,7 @@ function draw() {
   }
 
   //the game character
+
   stroke(0);
   if (isLeft && isFalling) {
     // add your jumping-left code
@@ -741,14 +746,24 @@ function draw() {
     );
   }
 
+  gameChar_world_x = gameChar_x - scrollPos;
   ///////////INTERACTION CODE//////////
   //Put conditional statements to move the game character below here
   if (!isPlummeting) {
     if (isLeft) {
-      gameChar_x -= 5;
+      if (gameChar_x > width * 0.2) {
+        gameChar_x -= 5;
+      } else {
+        scrollPos += 5;
+      }
     }
+
     if (isRight) {
-      gameChar_x += 5;
+      if (gameChar_x < width * 0.8) {
+        gameChar_x += 5;
+      } else {
+        scrollPos -= 5; // negative for moving against the background
+      }
     }
   }
 
@@ -800,15 +815,20 @@ function keyReleased() {
 }
 
 function drawClouds() {
+  push();
+  translate(scrollPos, 0);
   for (var i = 0; i < cloud.x_pos.length; i++) {
     fill(255);
     ellipse(cloud.x_pos[i] + 200, cloud.y_pos, 5 * cloud.size);
     ellipse(cloud.x_pos[i] + 250, cloud.y_pos, 5 * cloud.size);
     ellipse(cloud.x_pos[i] + 300, cloud.y_pos, 4 * cloud.size);
   }
+  pop();
 }
 
 function drawMountains() {
+  push();
+  translate(scrollPos, 0);
   for (var i = 0; i < mountain.x_pos.length; i++) {
     fill(105, 105, 105);
     quad(
@@ -847,9 +867,12 @@ function drawMountains() {
       mountain.y_pos + 132
     );
   }
+  pop();
 }
 
 function drawTrees() {
+  push();
+  translate(scrollPos, 0);
   for (var i = 0; i < trees_x.length; i++) {
     fill(165, 42, 42);
     rect(trees_x[i], treePos_y, 20, 145);
@@ -879,16 +902,20 @@ function drawTrees() {
       treePos_y - 22
     );
   }
+  pop();
 }
 
 function drawCollectable(t_collectable) {
   fill(255, 215, 0);
+  push();
+  translate(scrollPos, 0);
   ellipse(
     t_collectable.x_pos + 20,
     t_collectable.y_pos,
     t_collectable.size,
     t_collectable.size
   );
+  pop();
 }
 
 function checkCollectable(t_collectable) {
@@ -904,7 +931,10 @@ function checkCollectable(t_collectable) {
 
 function drawCanyon(t_canyon) {
   fill(139, 69, 19);
+  push();
+  translate(scrollPos, 0);
   rect(t_canyon.x_pos, floorPos_y, t_canyon.width, height - floorPos_y);
+  pop();
 }
 
 function checkCanyon(t_canyon) {
@@ -914,5 +944,7 @@ function checkCanyon(t_canyon) {
     gameChar_y >= floorPos_y
   ) {
     isPlummeting = true;
+  } else {
+    isPlummeting = false;
   }
 }
